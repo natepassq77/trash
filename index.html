@@ -16,6 +16,8 @@
     <!-- Mobile optimization -->
     <meta name="theme-color" content="#F5E6C8">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body>
     <canvas id="leavesCanvas"></canvas>
@@ -51,53 +53,53 @@
                 <aside class="poems-list" role="complementary" aria-label="List of poems">
                     <h2>Archive</h2>
                     <div class="poems-nav">
-                        <button class="poem-item" data-poem="altars-of-salt" aria-describedby="altars-preview">
+                        <button class="poem-item" data-poem="altars-of-salt" type="button" aria-describedby="altars-preview">
                             <span class="poem-icon">🌹</span>
                             <span class="poem-title">Altars of Salt</span>
                             <span class="poem-preview" id="altars-preview">I am building altars from salt...</span>
                         </button>
-                        <button class="poem-item" data-poem="guillotine-of-sugar" aria-describedby="guillotine-preview">
+                        <button class="poem-item" data-poem="guillotine-of-sugar" type="button" aria-describedby="guillotine-preview">
                             <span class="poem-icon">🌹</span>
                             <span class="poem-title">Guillotine of Sugar</span>
                             <span class="poem-preview" id="guillotine-preview">You are made of sugar and lightning...</span>
                         </button>
-                        <button class="poem-item" data-poem="library-of-ash" aria-describedby="library-preview">
+                        <button class="poem-item" data-poem="library-of-ash" type="button" aria-describedby="library-preview">
                             <span class="poem-icon">🍂</span>
                             <span class="poem-title">Library of Ash</span>
                             <span class="poem-preview" id="library-preview">Every book I've loved has burned...</span>
                         </button>
-                        <button class="poem-item" data-poem="cartography-of-time" aria-describedby="cartography-preview">
+                        <button class="poem-item" data-poem="cartography-of-time" type="button" aria-describedby="cartography-preview">
                             <span class="poem-icon">🍂</span>
                             <span class="poem-title">Cartography of Time</span>
                             <span class="poem-preview" id="cartography-preview">I am mapping the places where time breaks...</span>
                         </button>
-                        <button class="poem-item" data-poem="winters-not-a-season" aria-describedby="winters-preview">
+                        <button class="poem-item" data-poem="winters-not-a-season" type="button" aria-describedby="winters-preview">
                             <span class="poem-icon">🍂</span>
                             <span class="poem-title">Winter's Not a Season</span>
                             <span class="poem-preview" id="winters-preview">Winter's not a season, it's a state of mind...</span>
                         </button>
-                        <button class="poem-item" data-poem="cathedral-of-ruin" aria-describedby="cathedral-preview">
+                        <button class="poem-item" data-poem="cathedral-of-ruin" type="button" aria-describedby="cathedral-preview">
                             <span class="poem-icon">☠️</span>
                             <span class="poem-title">Cathedral of Ruin</span>
                             <span class="poem-preview" id="cathedral-preview">I built a cathedral from my ribs...</span>
                         </button>
-                        <button class="poem-item" data-poem="hunger-psalm" aria-describedby="hunger-preview">
+                        <button class="poem-item" data-poem="hunger-psalm" type="button" aria-describedby="hunger-preview">
                             <span class="poem-icon">☠️</span>
                             <span class="poem-title">The Hunger Psalm</span>
                             <span class="poem-preview" id="hunger-preview">Your absence is a famine...</span>
                         </button>
-                        <button class="poem-item" data-poem="elegy-with-your-name" aria-describedby="elegy-preview">
+                        <button class="poem-item" data-poem="elegy-with-your-name" type="button" aria-describedby="elegy-preview">
                             <span class="poem-icon">☠️</span>
                             <span class="poem-title">Elegy with Your Name in It</span>
                             <span class="poem-preview" id="elegy-preview">Bury me, but not in soil...</span>
                         </button>
-                        <button class="poem-item" data-poem="secret-door" aria-describedby="secret-door-preview">
+                        <button class="poem-item" data-poem="secret-door" type="button" aria-describedby="secret-door-preview">
                             <span class="poem-icon">🌹</span>
                             <span class="poem-title">Secret Door</span>
                             <span class="poem-preview" id="secret-door-preview">There is a door behind your sternum...</span>
                         </button>
                     </div>
-                    <button class="random-poem-btn" aria-label="Read a random poem">
+                    <button class="random-poem-btn" type="button" aria-label="Read a random poem">
                         <span class="ink-blot"></span>
                         Random Poem
                     </button>
@@ -108,8 +110,8 @@
                         <p class="select-prompt">Select a poem to begin reading...</p>
                     </div>
                     <div class="poem-navigation">
-                        <button class="nav-btn prev-btn" aria-label="Previous poem">‹ Previous</button>
-                        <button class="nav-btn next-btn" aria-label="Next poem">Next ›</button>
+                        <button class="nav-btn prev-btn" type="button" aria-label="Previous poem">‹ Previous</button>
+                        <button class="nav-btn next-btn" type="button" aria-label="Next poem">Next ›</button>
                     </div>
                 </main>
             </div>
@@ -403,6 +405,6 @@
         </div>
     </div>
 
-    <script src="script.v2.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
