@@ -1,1 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>A Collection of Poems - A Haunted Archive</title>
+    <meta name="description" content="A collection of haunted poems — some restless, some gentle, all written like offerings.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@300;400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Mobile optimization -->
+    <meta name="theme-color" content="#F5E6C8">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <canvas id="leavesCanvas"></canvas>
+    
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#home" class="nav-link" aria-label="Home">Home</a>
+            <a href="#poems" class="nav-link" aria-label="Poems">Poems</a>
+            <a href="#about" class="nav-link" aria-label="About">About</a>
+            <a href="#secret" class="secret-link" aria-label="Enter the Quiet Room">Enter the Quiet Room</a>
+        </div>
+    </nav>
 
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home" class="section home-section" role="banner">
+            <div class="home-content">
+                <h1 class="main-title">A Collection of Poems</h1>
+                <p class="subtitle">Written on torn pages, whispered in candlelight.</p>
+                <div class="intro-text">
+                    <p>This is a small archive of haunted poems — some restless, some gentle, all written like offerings. Step softly; words remember who reads them.</p>
+                </div>
+                <button class="enter-button" aria-label="Enter the Archive">Enter the Archive</button>
+                <div class="nano-signature">
+                    <small>from nano <span class="heart">♥</span></small>
+                </div>
+            </div>
+        </section>
+
+        <!-- POEMS SECTION -->
+        <section id="poems" class="section poems-section">
+            <div class="poems-container">
+                <aside class="poems-list" role="complementary" aria-label="List of poems">
+                    <h2>Archive</h2>
+                    <div class="poems-nav">
+                        <button class="poem-item" data-poem="altars-of-salt" aria-describedby="altars-preview">
+                            <span class="poem-icon">🌹</span>
+                            <span class="poem-title">Altars of Salt</span>
+                            <span class="poem-preview" id="altars-preview">I am building altars from salt...</span>
+                        </button>
+                        <button class="poem-item" data-poem="guillotine-of-sugar" aria-describedby="guillotine-preview">
+                            <span class="poem-icon">🌹</span>
+                            <span class="poem-title">Guillotine of Sugar</span>
+                            <span class="poem-preview" id="guillotine-preview">You are made of sugar and lightning...</span>
+                        </button>
+                        <button class="poem-item" data-poem="library-of-ash" aria-describedby="library-preview">
+                            <span class="poem-icon">🍂</span>
+                            <span class="poem-title">Library of Ash</span>
+                            <span class="poem-preview" id="library-preview">Every book I've loved has burned...</span>
+                        </button>
+                        <button class="poem-item" data-poem="cartography-of-time" aria-describedby="cartography-preview">
+                            <span class="poem-icon">🍂</span>
+                            <span class="poem-title">Cartography of Time</span>
+                            <span class="poem-preview" id="cartography-preview">I am mapping the places where time breaks...</span>
+                        </button>
+                        <button class="poem-item" data-poem="winters-not-a-season" aria-describedby="winters-preview">
+                            <span class="poem-icon">🍂</span>
+                            <span class="poem-title">Winter's Not a Season</span>
+                            <span class="poem-preview" id="winters-preview">Winter's not a season, it's a state of mind...</span>
+                        </button>
+                        <button class="poem-item" data-poem="cathedral-of-ruin" aria-describedby="cathedral-preview">
+                            <span class="poem-icon">☠️</span>
+                            <span class="poem-title">Cathedral of Ruin</span>
+                            <span class="poem-preview" id="cathedral-preview">I built a cathedral from my ribs...</span>
+                        </button>
+                        <button class="poem-item" data-poem="hunger-psalm" aria-describedby="hunger-preview">
+                            <span class="poem-icon">☠️</span>
+                            <span class="poem-title">The Hunger Psalm</span>
+                            <span class="poem-preview" id="hunger-preview">Your absence is a famine...</span>
+                        </button>
+                        <button class="poem-item" data-poem="elegy-with-your-name" aria-describedby="elegy-preview">
+                            <span class="poem-icon">☠️</span>
+                            <span class="poem-title">Elegy with Your Name in It</span>
+                            <span class="poem-preview" id="elegy-preview">Bury me, but not in soil...</span>
+                        </button>
+                        <button class="poem-item" data-poem="secret-door" aria-describedby="secret-door-preview">
+                            <span class="poem-icon">🌹</span>
+                            <span class="poem-title">Secret Door</span>
+                            <span class="poem-preview" id="secret-door-preview">There is a door behind your sternum...</span>
+                        </button>
+                    </div>
+                    <button class="random-poem-btn" aria-label="Read a random poem">
+                        <span class="ink-blot"></span>
+                        Random Poem
+                    </button>
+                </aside>
+
+                <main class="poem-reader" role="main" aria-label="Poem reading area">
+                    <div class="poem-content" id="poem-display">
+                        <p class="select-prompt">Select a poem to begin reading...</p>
+                    </div>
+                    <div class="poem-navigation">
+                        <button class="nav-btn prev-btn" aria-label="Previous poem">‹ Previous</button>
+                        <button class="nav-btn next-btn" aria-label="Next poem">Next ›</button>
+                    </div>
+                </main>
+            </div>
+        </section>
+
+        <!-- SECRET SECTION -->
+        <section id="secret" class="section secret-section">
+            <div class="secret-content">
+                <div class="letter-container">
+                    <h2>The Quiet Room</h2>
+                    <div class="poem-text">
+                        <h3>Secret Door</h3>
+                        <p>There is a door behind your sternum<br>
+                        that only opens when you're not looking.<br>
+                        I've been waiting there for hours,<br>
+                        patient as a prayer,<br>
+                        watching the lock turn silver in your sleep.</p>
+                        
+                        <p>If you opened it,<br>
+                        what would spill out?<br>
+                        Months of almosts, maybe.<br>
+                        The weight of every word I never said<br>
+                        hanging in the air like snow<br>
+                        that refuses to fall.</p>
+                        
+                        <p>I think I know the combination now:<br>
+                        your middle name backwards,<br>
+                        the number of times you've almost left,<br>
+                        the exact shade of blue<br>
+                        your sorrow wears on Sundays.</p>
+                    </div>
+                    <div class="secret-message">
+                        <p><em>If you found this place, know these poems were always written with you in mind.</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section about-section">
+            <div class="about-content">
+                <h2>About</h2>
+                <p>These are fragments, gathered in quiet hours. The author prefers silence to biography.</p>
+                <div class="contact">
+                    <p>For correspondence: <a href="mailto:poems@haunted-archive.com" class="contact-link">poems@haunted-archive.com</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 — a haunted archive</p>
+    </footer>
+
+    <!-- Hidden poem content for JavaScript -->
+    <div class="hidden-poems" style="display: none;">
+        <div id="altars-of-salt-content">
+            <h3>Altars of Salt</h3>
+            <div class="poem-text">
+                <p>I am building altars from salt<br>
+                and the small deaths you leave behind:<br>
+                coffee grounds in the sink,<br>
+                your name half-erased from my phone,<br>
+                the way you say "maybe tomorrow"<br>
+                like a prayer I'm not allowed to answer.</p>
+
+                <p>What do I sacrifice here?<br>
+                Every morning I don't text you first.<br>
+                Every night I don't dream your face<br>
+                into the space beside me.</p>
+
+                <p>The salt dissolves when it rains.<br>
+                I rebuild it anyway,<br>
+                grain by grain,<br>
+                until my hands are raw<br>
+                and my mouth tastes like the ocean<br>
+                where all the drowned prayers go.</p>
+            </div>
+        </div>
+
+        <div id="guillotine-of-sugar-content">
+            <h3>Guillotine of Sugar</h3>
+            <div class="poem-text">
+                <p>You are made of sugar and lightning,<br>
+                sharp enough to cut clean through<br>
+                but sweet enough that I keep<br>
+                putting my neck on the block.</p>
+
+                <p>Every "good morning" is a small execution.<br>
+                Every "sleep well" drops the blade.<br>
+                I collect the pieces of myself<br>
+                in mason jars, label them<br>
+                by date and intensity of ache.</p>
+
+                <p>When you smile,<br>
+                the crowd cheers.<br>
+                When you leave,<br>
+                they sweep up what's left of me<br>
+                and throw it to the birds.</p>
+
+                <p>Tomorrow I'll climb the scaffold again,<br>
+                adjust the blindfold,<br>
+                and wait for you to say my name<br>
+                like it's the last word<br>
+                I'll ever need to hear.</p>
+            </div>
+        </div>
+
+        <div id="library-of-ash-content">
+            <h3>Library of Ash</h3>
+            <div class="poem-text">
+                <p>Every book I've loved has burned.<br>
+                Not in flames, but in the quiet way<br>
+                that words turn to dust<br>
+                when you read them too many times,<br>
+                when you press your thumb<br>
+                against the same sentence<br>
+                until the ink bleeds through your skin.</p>
+
+                <p>I am walking through the ruins now,<br>
+                kicking at the remnants<br>
+                of stories I once believed<br>
+                could save me from myself.</p>
+
+                <p>Here: the ashes of every love poem<br>
+                I copied into margins.<br>
+                There: the spine of a philosophy book<br>
+                that taught me how to think<br>
+                but not how to stop.</p>
+
+                <p>The librarian is long gone.<br>
+                I am alone with the catalog<br>
+                of everything I've lost to language,<br>
+                writing my name in the dust<br>
+                with a finger that remembers<br>
+                how to turn pages<br>
+                that no longer exist.</p>
+            </div>
+        </div>
+
+        <div id="cartography-of-time-content">
+            <h3>Cartography of Time</h3>
+            <div class="poem-text">
+                <p>I am mapping the places where time breaks:<br>
+                3:17 AM when your text lights up my phone,<br>
+                the moment between waking and remembering<br>
+                that you're not here,<br>
+                the second before you say goodbye<br>
+                and the hour after you're gone.</p>
+
+                <p>Here be dragons:<br>
+                the kitchen where we fought<br>
+                about nothing and everything,<br>
+                the bookstore aisle where you first<br>
+                told me you loved me,<br>
+                the parking lot where we learned<br>
+                that some things can't be taken back.</p>
+
+                <p>I draw latitude and longitude<br>
+                around the shape of your absence,<br>
+                mark each coordinate<br>
+                where memory bends<br>
+                like light around a star.</p>
+
+                <p>Somewhere in this geography<br>
+                there's a place where all our almosts<br>
+                live together,<br>
+                where the roads we didn't take<br>
+                converge in a city<br>
+                I'll never be able to visit.</p>
+            </div>
+        </div>
+
+        <div id="winters-not-a-season-content">
+            <h3>Winter's Not a Season</h3>
+            <div class="poem-text">
+                <p>Winter's not a season,<br>
+                it's a state of mind<br>
+                I've been living in<br>
+                since you stopped<br>
+                calling my name<br>
+                like it meant coming home.</p>
+
+                <p>The snow inside my chest<br>
+                doesn't melt in spring.<br>
+                It just gets older,<br>
+                harder,<br>
+                until I'm walking around<br>
+                with a glacier for a heart<br>
+                and frostbite in my fingertips<br>
+                every time I reach for the phone.</p>
+
+                <p>Sometimes I wonder<br>
+                if you feel the cold too,<br>
+                if your breath fogs<br>
+                when you say someone else's name<br>
+                with the same tenderness<br>
+                you used to save for mine.</p>
+
+                <p>But I think you're living<br>
+                in a different climate now,<br>
+                where the sun actually sets<br>
+                and rises again,<br>
+                where winter is just<br>
+                something that happens<br>
+                and then ends.</p>
+            </div>
+        </div>
+
+        <div id="cathedral-of-ruin-content">
+            <h3>Cathedral of Ruin</h3>
+            <div class="poem-text">
+                <p>I built a cathedral from my ribs<br>
+                and lit every vein like a candle.<br>
+                The saints turned their faces,<br>
+                the angels split their wings in shame,<br>
+                but I prayed anyway —<br>
+                not to heaven, not to mercy —<br>
+                only to the shape of your shadow<br>
+                etched across my skull.</p>
+
+                <p>If you enter me,<br>
+                the bells will shatter themselves to ringing.<br>
+                If you leave me,<br>
+                let the pews drown in ash.<br>
+                I will crawl through fire like a supplicant,<br>
+                I will name you in smoke<br>
+                until the air itself becomes unbreathable.</p>
+            </div>
+        </div>
+
+        <div id="hunger-psalm-content">
+            <h3>The Hunger Psalm</h3>
+            <div class="poem-text">
+                <p>Your absence is a famine,<br>
+                a hollow that eats bone.<br>
+                I starve on your silence,<br>
+                gnawing the marrow of memory<br>
+                until my mouth tastes only rust.</p>
+
+                <p>What god made me this way —<br>
+                a beast chained to your footsteps?<br>
+                If you turned once, just once,<br>
+                I would break every chain,<br>
+                devour the sky itself,<br>
+                swallow the stars like seeds<br>
+                just to plant your name in my blood.</p>
+            </div>
+        </div>
+
+        <div id="elegy-with-your-name-content">
+            <h3>Elegy with Your Name in It</h3>
+            <div class="poem-text">
+                <p>Bury me, but not in soil.<br>
+                Bury me in the syllables of your name.<br>
+                Carve it into my coffin lid,<br>
+                let worms read it as scripture.</p>
+
+                <p>The mourners will not understand.<br>
+                They will whisper of madness,<br>
+                of blasphemy, of ruin.<br>
+                But when I claw from the grave,<br>
+                when my mouth is dirt and thunder,<br>
+                it will not be God I cry for.<br>
+                It will be you. Always you.</p>
+            </div>
+        </div>
+
+        <div id="secret-door-content">
+            <h3>Secret Door</h3>
+            <div class="poem-text">
+                <p>There is a door behind your sternum<br>
+                that only opens when you're not looking.<br>
+                I've been waiting there for hours,<br>
+                patient as a prayer,<br>
+                watching the lock turn silver in your sleep.</p>
+                
+                <p>If you opened it,<br>
+                what would spill out?<br>
+                Months of almosts, maybe.<br>
+                The weight of every word I never said<br>
+                hanging in the air like snow<br>
+                that refuses to fall.</p>
+                
+                <p>I think I know the combination now:<br>
+                your middle name backwards,<br>
+                the number of times you've almost left,<br>
+                the exact shade of blue<br>
+                your sorrow wears on Sundays.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.v2.js" defer></script>
+</body>
+</html>
