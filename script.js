@@ -1,6 +1,4 @@
-// Poetry Website JavaScript - Gothic Romantic Theme
-// Enhanced for GitHub Pages compatibility with better event handling
-
+// Poetry Website JavaScript - Fixed version for proper poem interaction
 (function() {
     'use strict';
 
@@ -18,18 +16,13 @@
         'secret-door'
     ];
 
-    // DOM Elements - will be initialized after DOM load
+    // DOM Elements
     let poemItems, poemDisplay, prevBtn, nextBtn, randomBtn, enterBtn, navLinks;
-
-    // Touch handling variables
-    let touchStartY = 0;
-    let touchStartX = 0;
-    let isScrolling = false;
 
     // Initialize when DOM is ready
     function init() {
         console.log('Initializing poetry website...');
-        
+
         // Get DOM elements
         poemItems = document.querySelectorAll('.poem-item');
         poemDisplay = document.getElementById('poem-display');
@@ -46,12 +39,9 @@
 
         setupNavigation();
         setupPoemInteractions();
-        setupTouchHandling();
         setupFallingLeaves();
-        setupAnimations();
         updateNavigationButtons();
-        setupAccessibility();
-        
+
         console.log('Poetry website initialized successfully');
         console.log('Available poems:', poems);
         console.log('Poem items found:', poemItems.length);
@@ -63,7 +53,7 @@
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = this.getAttribute('href');
-                
+
                 if (target && target.startsWith('#')) {
                     const section = document.querySelector(target);
                     if (section) {
@@ -89,60 +79,32 @@
                 }
             });
         }
-
-        // Update active nav link on scroll
-        window.addEventListener('scroll', throttle(updateActiveNavLink, 100));
-    }
-
-    function updateActiveNavLink() {
-        const sections = document.querySelectorAll('.section');
-        const scrollPos = window.scrollY + 100;
-
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const bottom = top + section.offsetHeight;
-            const id = section.getAttribute('id');
-            const navLink = document.querySelector(`a[href="#${id}"]`);
-
-            if (scrollPos >= top && scrollPos <= bottom) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLink) {
-                    navLink.classList.add('active');
-                }
-            }
-        });
     }
 
     // Poem interactions setup
     function setupPoemInteractions() {
         console.log(`Setting up interactions for ${poemItems.length} poem items...`);
-        
-        // Poem selection with better event handling
+
+        // Poem selection
         poemItems.forEach((item, index) => {
             console.log(`Setting up poem item ${index}`);
-            
-            // Multiple event types for better compatibility
-            const events = ['click', 'touchend'];
-            
-            events.forEach(eventType => {
-                item.addEventListener(eventType, function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Avoid double-firing on devices that support both touch and mouse
-                    if (eventType === 'click' && e.type === 'click' && this.touchHandled) {
-                        this.touchHandled = false;
-                        return;
-                    }
-                    if (eventType === 'touchend') {
-                        this.touchHandled = true;
-                    }
-                    
-                    console.log(`Poem ${index} activated via ${eventType} - ${poems[index]}`);
-                    selectPoem(index);
-                }, { passive: false });
+
+            // Add click event listener
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`Poem ${index} clicked - ${poems[index]}`);
+                selectPoem(index);
             });
-            
+
+            // Add touch event for mobile
+            item.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`Poem ${index} touched - ${poems[index]}`);
+                selectPoem(index);
+            });
+
             // Keyboard accessibility
             item.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -185,7 +147,7 @@
                 const randomIndex = Math.floor(Math.random() * poems.length);
                 console.log(`Random poem selected: ${randomIndex}`);
                 selectPoem(randomIndex);
-                
+
                 // Simple ink blot animation
                 const inkBlot = this.querySelector('.ink-blot');
                 if (inkBlot) {
@@ -196,22 +158,11 @@
                 }
             });
         }
-
-        // Keyboard navigation for poems
-        document.addEventListener('keydown', function(e) {
-            if (document.activeElement && document.activeElement.closest('.poems-section')) {
-                if (e.key === 'ArrowLeft' && currentPoemIndex > 0) {
-                    selectPoem(currentPoemIndex - 1);
-                } else if (e.key === 'ArrowRight' && currentPoemIndex < poems.length - 1) {
-                    selectPoem(currentPoemIndex + 1);
-                }
-            }
-        });
     }
 
     function selectPoem(index) {
         console.log(`Selecting poem ${index} (${poems[index]})`);
-        
+
         if (index < 0 || index >= poems.length) {
             console.log('Invalid poem index:', index);
             return;
@@ -219,15 +170,13 @@
 
         currentPoemIndex = index;
         const poemId = poems[index];
-        
+
         // Update active poem in list
         poemItems.forEach((item, i) => {
             if (i === index) {
                 item.classList.add('active');
-                item.setAttribute('aria-pressed', 'true');
             } else {
                 item.classList.remove('active');
-                item.setAttribute('aria-pressed', 'false');
             }
         });
 
@@ -251,37 +200,32 @@
 
     function displayPoem(poemId) {
         console.log(`Displaying poem: ${poemId}`);
-        
+
         const poemContent = document.getElementById(`${poemId}-content`);
-        
+
         if (!poemContent) {
             console.error(`Could not find poem content for: ${poemId}`);
+            console.log('Available content elements:', Array.from(document.querySelectorAll('[id$="-content"]')).map(el => el.id));
             return;
         }
-        
+
         if (!poemDisplay) {
             console.error('Could not find poem display element');
             return;
         }
-        
+
         // Fade out current content
         poemDisplay.style.opacity = '0';
         poemDisplay.style.transform = 'translateY(20px)';
-        
+
         setTimeout(() => {
             // Replace content
             poemDisplay.innerHTML = poemContent.innerHTML;
             console.log('Poem content updated successfully');
-            
+
             // Fade in new content
             poemDisplay.style.opacity = '1';
             poemDisplay.style.transform = 'translateY(0)';
-            
-            // Announce to screen readers
-            const poemTitle = poemContent.querySelector('h3');
-            if (poemTitle && window.announcePoem) {
-                window.announcePoem(poemTitle.textContent);
-            }
         }, 300);
     }
 
@@ -289,78 +233,117 @@
         if (prevBtn) {
             prevBtn.disabled = currentPoemIndex <= 0;
             prevBtn.style.opacity = currentPoemIndex <= 0 ? '0.5' : '1';
-            prevBtn.setAttribute('aria-disabled', currentPoemIndex <= 0 ? 'true' : 'false');
         }
         if (nextBtn) {
             nextBtn.disabled = currentPoemIndex >= poems.length - 1;
             nextBtn.style.opacity = currentPoemIndex >= poems.length - 1 ? '0.5' : '1';
-            nextBtn.setAttribute('aria-disabled', currentPoemIndex >= poems.length - 1 ? 'true' : 'false');
         }
     }
 
-    // Touch handling for mobile devices
-    function setupTouchHandling() {
-        const poemsSection = document.getElementById('poems');
-        if (poemsSection) {
-            poemsSection.addEventListener('touchstart', handleTouchStart, { passive: true });
-            poemsSection.addEventListener('touchmove', handleTouchMove, { passive: true });
-            poemsSection.addEventListener('touchend', handleTouchEnd, { passive: false });
-        }
-    }
+    // Falling leaves animation (simplified for performance)
+    function setupFallingLeaves() {
+        const canvas = document.getElementById('leavesCanvas');
+        if (!canvas) return;
 
-    function handleTouchStart(e) {
-        if (e.touches && e.touches.length === 1) {
-            touchStartY = e.touches[0].clientY;
-            touchStartX = e.touches[0].clientX;
-            isScrolling = false;
-        }
-    }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-    function handleTouchMove(e) {
-        if (!touchStartY || !touchStartX || (e.touches && e.touches.length > 1)) {
-            return;
+        let leaves = [];
+        const maxLeaves = window.innerWidth < 768 ? 8 : 15;
+
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
 
-        if (e.touches && e.touches[0]) {
-            const touchY = e.touches[0].clientY;
-            const touchX = e.touches[0].clientX;
-            const diffY = touchStartY - touchY;
-            const diffX = touchStartX - touchX;
+        // Leaf constructor
+        function Leaf() {
+            this.x = Math.random() * canvas.width;
+            this.y = -10;
+            this.size = Math.random() * 5 + 3;
+            this.speed = Math.random() * 1.2 + 0.4;
+            this.rotation = Math.random() * 360;
+            this.rotationSpeed = (Math.random() - 0.5) * 2;
+            this.opacity = Math.random() * 0.4 + 0.2;
+            this.drift = Math.random() * 1.2 - 0.6;
+            this.color = 'rgba(122, 82, 48, 0.5)';
+        }
 
-            // Determine if user is scrolling
-            if (Math.abs(diffY) > Math.abs(diffX)) {
-                isScrolling = true;
+        Leaf.prototype.update = function() {
+            this.y += this.speed;
+            this.x += this.drift * 0.3;
+            this.rotation += this.rotationSpeed;
+
+            if (this.y > canvas.height + 10) {
+                this.y = -10;
+                this.x = Math.random() * canvas.width;
             }
+        };
+
+        Leaf.prototype.draw = function() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation * Math.PI / 180);
+            ctx.globalAlpha = this.opacity;
+
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, this.size, this.size * 1.4, 0, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.restore();
+        };
+
+        // Initialize leaves
+        for (let i = 0; i < maxLeaves; i++) {
+            leaves.push(new Leaf());
         }
+
+        // Animation loop
+        function animate() {
+            if (document.hidden) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            leaves.forEach(leaf => {
+                leaf.update();
+                leaf.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        resizeCanvas();
+        animate();
+
+        window.addEventListener('resize', resizeCanvas);
     }
 
-    function handleTouchEnd(e) {
-        if (isScrolling || !touchStartY || !touchStartX) {
-            return;
+    // Debug utilities
+    window.poemDebug = {
+        currentPoem: () => currentPoemIndex >= 0 ? poems[currentPoemIndex] : 'none',
+        selectPoem: selectPoem,
+        poemCount: poems.length,
+        testPoem: (index) => {
+            console.log(`Testing poem ${index}`);
+            selectPoem(index);
+        },
+        listAllPoems: () => {
+            console.log('All poems:', poems);
+            console.log('Poem elements found:');
+            poems.forEach((poemId, index) => {
+                const element = document.getElementById(`${poemId}-content`);
+                console.log(`${index}: ${poemId} - ${element ? 'FOUND' : 'MISSING'}`);
+            });
         }
+    };
 
-        if (e.changedTouches && e.changedTouches[0]) {
-            const touchEndY = e.changedTouches[0].clientY;
-            const touchEndX = e.changedTouches[0].clientX;
-            const diffY = touchStartY - touchEndY;
-            const diffX = touchStartX - touchEndX;
-
-            // Swipe gestures for poem navigation (only on mobile)
-            if (window.innerWidth < 768 && Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-                if (diffX > 0 && currentPoemIndex < poems.length - 1) {
-                    // Swipe left - next poem
-                    selectPoem(currentPoemIndex + 1);
-                } else if (diffX < 0 && currentPoemIndex > 0) {
-                    // Swipe right - previous poem
-                    selectPoem(currentPoemIndex - 1);
-                }
-            }
-        }
-
-        // Reset touch values
-        touchStartY = 0;
-        touchStartX = 0;
-        isScrolling = false;
+    // Initialize when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 
-    // Accessibility improvements
+})();
