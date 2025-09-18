@@ -1,3 +1,13 @@
+/* CSS Variables */
+:root {
+    --deep-burgundy: #4B2C2C;
+    --burnt-umber: #7A5230;
+    --muted-gold: #D4AF37;
+    --parchment: #F5E6C8;
+    --black-ink: #2C1810;
+    --soft-shadow: rgba(0, 0, 0, 0.15);
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -5,47 +15,19 @@
     box-sizing: border-box;
 }
 
-:root {
-    --deep-burgundy: #4B2C2C;
-    --burnt-umber: #7A5230;
-    --muted-gold: #D4AF37;
-    --parchment: #F5E6C8;
-    --black-ink: #1B1B1B;
-    --dark-parchment: #E8D5B7;
-    --soft-shadow: rgba(75, 44, 44, 0.3);
-    --text-shadow: rgba(27, 27, 27, 0.8);
-}
-
 html {
     scroll-behavior: smooth;
-    font-size: 16px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    html {
-        scroll-behavior: auto;
-    }
 }
 
 body {
     font-family: 'Lora', 'Merriweather', serif;
-    background: var(--parchment);
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(120, 82, 48, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(75, 44, 44, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+    background: linear-gradient(135deg, var(--parchment) 0%, #F0E0C0 100%);
     color: var(--black-ink);
-    line-height: 1.8;
-    letter-spacing: 0.3px;
-    overflow-x: hidden;
+    line-height: 1.7;
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -126,69 +108,44 @@ h3 {
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 2.5rem);
     padding: 0 1rem;
 }
 
 .nav-link, .secret-link {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    font-weight: 500;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: var(--deep-burgundy);
     text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 6px;
     position: relative;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0.8rem;
-    border-radius: 4px;
-    white-space: nowrap;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--muted-gold);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.nav-link:hover::before {
-    width: 100%;
-}
-
-.nav-link:hover, .nav-link:focus {
-    color: var(--muted-gold);
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
-    outline: none;
+.nav-link:hover, .nav-link.active,
+.secret-link:hover {
+    color: var(--burnt-umber);
+    background: rgba(212, 175, 55, 0.15);
+    transform: translateY(-2px);
 }
 
 .secret-link {
-    font-size: clamp(0.85rem, 2vw, 0.9rem);
-    opacity: 0.6;
     font-style: italic;
-    color: var(--burnt-umber);
+    opacity: 0.8;
 }
 
-.secret-link:hover {
-    opacity: 1;
-    color: var(--muted-gold);
-    text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
-}
-
-/* Sections */
+/* Section Styles */
 .section {
     min-height: 100vh;
-    padding: 5rem 1rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
     position: relative;
     z-index: 2;
 }
@@ -199,55 +156,53 @@ h3 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: 
-        radial-gradient(ellipse at center, rgba(245, 230, 200, 0.8) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1), transparent 70%);
 }
 
 .home-content {
-    max-width: 600px;
-    animation: fadeInUp 1s ease-out;
-    padding: 0 1rem;
+    max-width: 800px;
+    animation: fadeInUp 1.2s ease-out;
 }
 
 .main-title {
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--deep-burgundy) 0%, var(--burnt-umber) 100%);
+    background: linear-gradient(135deg, var(--deep-burgundy), var(--burnt-umber));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin-bottom: 1.5rem;
 }
 
 .subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 3vw, 1.5rem);
     font-style: italic;
     color: var(--burnt-umber);
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
     margin-bottom: 2rem;
     opacity: 0.9;
 }
 
 .intro-text {
-    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-    margin-bottom: 2.5rem;
-    line-height: 1.9;
-    color: var(--black-ink);
-    opacity: 0.8;
+    margin: 2.5rem 0;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
 }
 
 .enter-button {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    font-weight: 600;
-    background: var(--deep-burgundy);
+    background: linear-gradient(135deg, var(--deep-burgundy), var(--burnt-umber));
     color: var(--parchment);
     border: none;
     padding: 1rem 2rem;
-    border-radius: 6px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-family: 'Cormorant Garamond', serif;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     box-shadow: 0 4px 15px var(--soft-shadow);
     position: relative;
     overflow: hidden;
+    min-height: 50px;
     touch-action: manipulation;
 }
 
@@ -258,166 +213,135 @@ h3 {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
-    transition: left 0.5s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
-.enter-button:hover::before {
+.enter-button:hover::before,
+.enter-button:focus::before {
     left: 100%;
 }
 
-.enter-button:hover, .enter-button:focus {
-    background: var(--burnt-umber);
-    transform: translateY(-2px);
+.enter-button:hover,
+.enter-button:focus {
+    transform: translateY(-3px);
     box-shadow: 0 6px 20px var(--soft-shadow);
     outline: none;
 }
 
 .nano-signature {
     margin-top: 3rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--burnt-umber);
+    font-size: clamp(0.9rem, 2vw, 1rem);
     opacity: 0.7;
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
 }
 
 .heart {
     color: var(--deep-burgundy);
-    font-size: 1.1em;
-    display: inline-block;
     animation: heartbeat 2s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-    0%, 50%, 100% { transform: scale(1); }
-    25% { transform: scale(1.1); }
 }
 
 /* Poems Section */
 .poems-section {
-    padding-top: 4rem;
+    padding: 2rem;
+    min-height: 100vh;
 }
 
 .poems-container {
+    max-width: 1400px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-    min-height: 80vh;
+    height: calc(100vh - 4rem);
+}
+
+@media (min-width: 768px) {
+    .poems-container {
+        grid-template-columns: 400px 1fr;
+        gap: 3rem;
+    }
 }
 
 .poems-list {
-    background: rgba(245, 230, 200, 0.6);
+    background: rgba(245, 230, 200, 0.9);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 2rem;
     box-shadow: 0 8px 25px var(--soft-shadow);
     backdrop-filter: blur(5px);
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    position: relative;
 }
 
 .poems-list h2 {
     text-align: center;
     margin-bottom: 2rem;
-    position: relative;
-}
-
-.poems-list h2::after {
-    content: '❦';
-    display: block;
-    font-size: 1.5rem;
-    color: var(--muted-gold);
-    margin-top: 0.5rem;
+    color: var(--deep-burgundy);
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
 }
 
 .poems-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem;
     margin-bottom: 2rem;
 }
 
 .poem-item {
-    background: transparent;
-    border: 1px solid rgba(75, 44, 44, 0.2);
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid transparent;
     border-radius: 8px;
     padding: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 1rem;
     position: relative;
-    overflow: hidden;
     min-height: 60px;
     touch-action: manipulation;
     -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3);
-    tap-highlight-color: rgba(212, 175, 55, 0.3);
-    user-select: none;
-    -webkit-user-select: none;
 }
 
-.poem-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-    transition: left 0.4s ease;
-}
-
-.poem-item:hover::before {
-    left: 100%;
-}
-
-.poem-item:hover, .poem-item:focus, .poem-item.active {
-    background: rgba(212, 175, 55, 0.1);
+.poem-item:hover,
+.poem-item:focus,
+.poem-item.active {
+    background: rgba(212, 175, 55, 0.2);
     border-color: var(--muted-gold);
     transform: translateX(8px);
-    box-shadow: -4px 4px 15px var(--soft-shadow);
+    box-shadow: 0 4px 15px var(--soft-shadow);
     outline: none;
 }
 
+.poem-item:active {
+    transform: translateX(4px) scale(0.98);
+    background: rgba(212, 175, 55, 0.3);
+}
+
 .poem-icon {
-    font-size: 1.2rem;
-    min-width: 1.5rem;
-    animation: iconFloat 3s ease-in-out infinite;
-    align-self: flex-start;
-}
-
-@keyframes iconFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-2px); }
-}
-
-.poem-item:hover .poem-icon {
-    animation: iconHover 0.6s ease-in-out;
-}
-
-@keyframes iconHover {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2) rotate(10deg); }
-    100% { transform: scale(1); }
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 0.2rem;
 }
 
 .poem-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
     font-weight: 600;
     color: var(--deep-burgundy);
-    flex: 1;
-    width: 100%;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 .poem-preview {
-    font-size: clamp(0.8rem, 2vw, 0.85rem);
-    color: var(--burnt-umber);
     font-style: italic;
-    opacity: 0.7;
-    margin-top: 0.3rem;
-    width: 100%;
+    color: var(--burnt-umber);
+    opacity: 0.8;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    line-height: 1.4;
+    display: block;
 }
 
 .random-poem-btn {
@@ -429,39 +353,30 @@ h3 {
     cursor: pointer;
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1rem, 2.5vw, 1.1rem);
-    font-weight: 600;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    margin-top: 1rem;
+    min-height: 50px;
+    touch-action: manipulation;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    touch-action: manipulation;
-    width: 100%;
 }
 
 .ink-blot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     background: var(--parchment);
     border-radius: 50%;
+    display: inline-block;
     transition: all 0.3s ease;
 }
 
-.random-poem-btn:hover .ink-blot, .random-poem-btn:focus .ink-blot {
-    animation: inkBlotExpand 0.6s ease-out;
-}
-
 .ink-blot.clicked {
-    animation: inkBlotExpand 0.6s ease-out !important;
-}
-
-@keyframes inkBlotExpand {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(3); opacity: 0.3; }
-    100% { transform: scale(1); opacity: 1; }
+    transform: scale(1.5);
+    opacity: 0.5;
 }
 
 .random-poem-btn:hover, .random-poem-btn:focus {
@@ -481,6 +396,14 @@ h3 {
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .poem-reader {
+        margin-top: 0;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+    }
 }
 
 .poem-content {
@@ -532,12 +455,13 @@ h3 {
     flex: 1;
     max-width: 140px;
     touch-action: manipulation;
+    min-height: 44px;
 }
 
-.nav-btn:hover, .nav-btn:focus {
+.nav-btn:hover,
+.nav-btn:focus {
     background: var(--burnt-umber);
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px var(--soft-shadow);
+    transform: translateY(-2px);
     outline: none;
 }
 
@@ -549,247 +473,213 @@ h3 {
 
 /* Secret Section */
 .secret-section {
-    background: 
-        radial-gradient(ellipse at center, rgba(75, 44, 44, 0.05) 0%, transparent 70%);
+    background: linear-gradient(135deg, rgba(75, 44, 44, 0.1), rgba(212, 175, 55, 0.05));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .secret-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
+    max-width: 800px;
+    text-align: center;
 }
 
 .letter-container {
-    background: rgba(245, 230, 200, 0.9);
-    border: 2px solid rgba(120, 82, 48, 0.3);
+    background: rgba(245, 230, 200, 0.95);
     border-radius: 12px;
-    padding: 2rem;
-    max-width: 600px;
-    box-shadow: 0 12px 30px var(--soft-shadow);
-    animation: letterUnfold 0.8s ease-out;
+    padding: 3rem;
+    box-shadow: 0 15px 35px var(--soft-shadow);
     backdrop-filter: blur(10px);
-    margin: 0 1rem;
-    width: 100%;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transform: perspective(1000px) rotateX(5deg);
+    transition: all 0.4s ease;
 }
 
-@keyframes letterUnfold {
-    0% {
-        transform: scale(0.8) rotateX(-20deg);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1) rotateX(0deg);
-        opacity: 1;
-    }
-}
-
-.letter-container h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--deep-burgundy);
+.letter-container:hover {
+    transform: perspective(1000px) rotateX(0deg);
 }
 
 .secret-message {
     margin-top: 2rem;
-    text-align: center;
-    font-style: italic;
-    color: var(--burnt-umber);
-    border-top: 1px solid rgba(120, 82, 48, 0.3);
-    padding-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--muted-gold);
 }
 
 /* About Section */
 .about-section {
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(120, 82, 48, 0.05), transparent);
 }
 
 .about-content {
-    max-width: 500px;
+    max-width: 600px;
     background: rgba(245, 230, 200, 0.8);
-    padding: 2rem;
     border-radius: 12px;
+    padding: 3rem;
     box-shadow: 0 8px 25px var(--soft-shadow);
     backdrop-filter: blur(5px);
-    margin: 0 1rem;
-    width: 100%;
 }
 
 .about-content p {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     margin-bottom: 2rem;
     line-height: 1.8;
-}
-
-.contact {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(120, 82, 48, 0.3);
 }
 
 .contact-link {
     color: var(--deep-burgundy);
     text-decoration: none;
-    font-weight: 500;
-    position: relative;
+    border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
-    word-break: break-all;
 }
 
-.contact-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--muted-gold);
-    transition: width 0.3s ease;
-}
-
-.contact-link:hover::after, .contact-link:focus::after {
-    width: 100%;
-}
-
-.contact-link:hover, .contact-link:focus {
-    color: var(--muted-gold);
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
+.contact-link:hover,
+.contact-link:focus {
+    border-bottom-color: var(--deep-burgundy);
     outline: none;
 }
 
 /* Footer */
 .main-footer {
+    background: var(--deep-burgundy);
+    color: var(--parchment);
     text-align: center;
     padding: 2rem;
-    background: rgba(75, 44, 44, 0.1);
-    color: var(--burnt-umber);
-    font-style: italic;
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 /* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Hidden content */
-.hidden-poems {
-    display: none !important;
-}
-
-/* Responsive Design */
-@media (min-width: 480px) {
-    .section {
-        padding: 5rem 2rem 2rem;
-    }
-    
-    .poem-item {
-        flex-direction: row;
-        align-items: center;
-        gap: 1rem;
-        min-height: auto;
-    }
-    
-    .poem-title {
-        width: auto;
-    }
-    
-    .poem-preview {
-        position: absolute;
-        bottom: 0.5rem;
-        left: 3.5rem;
-        right: 1rem;
+    from {
         opacity: 0;
-        transition: opacity 0.3s ease;
-        width: auto;
-        margin-top: 0;
+        transform: translateY(50px);
     }
-    
-    .poem-item:hover .poem-preview {
-        opacity: 0.8;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@media (min-width: 768px) {
-    .nav-container {
-        justify-content: space-between;
-        gap: 2rem;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-    
-    .nav-container::before {
-        content: '❦';
-        font-size: 1.5rem;
-        color: var(--muted-gold);
+    to {
+        opacity: 1;
     }
-    
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes iconHover {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-5deg) scale(1.1);
+    }
+    75% {
+        transform: rotate(5deg) scale(1.1);
+    }
+}
+
+@keyframes letterUnfold {
+    from {
+        transform: perspective(1000px) rotateX(-90deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(1000px) rotateX(5deg);
+        opacity: 1;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 767px) {
     .section {
-        padding: 6rem 2rem 2rem;
+        padding: 4rem 1rem 2rem;
     }
-    
+
+    .poems-section {
+        padding: 1rem;
+    }
+
     .poems-container {
-        grid-template-columns: 1fr 1.5fr;
-        gap: 3rem;
+        height: auto;
+        min-height: calc(100vh - 2rem);
     }
-    
+
+    .poems-list {
+        max-height: none;
+        margin-bottom: 1rem;
+    }
+
     .poem-reader {
-        margin-top: 0;
+        min-height: 400px;
+        margin-top: 1rem;
     }
-    
-    .poems-list, .poem-reader {
+
+    .poem-navigation {
+        flex-direction: column;
+    }
+
+    .nav-btn {
+        max-width: none;
+    }
+
+    .letter-container {
+        padding: 2rem;
+        transform: none;
+    }
+
+    .letter-container:hover {
+        transform: none;
+    }
+
+    .about-content {
         padding: 2rem;
     }
-    
-    .letter-container {
-        padding: 3rem;
+
+    /* Improve touch targets */
+    button, .nav-link, .poem-item {
+        min-height: 44px;
     }
-    
-    .about-content {
-        padding: 3rem;
+
+    /* Better tap highlights */
+    button:active, .poem-item:active {
+        background-color: rgba(212, 175, 55, 0.3);
     }
 }
 
-@media (min-width: 1024px) {
-    .section {
-        padding: 8rem 2rem 2rem;
-    }
-    
-    .poems-container {
-        gap: 4rem;
-    }
-    
-    .letter-container {
-        padding: 4rem;
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-    .poem-item:hover::before {
-        left: 0;
-    }
-    
-    .poem-item .poem-preview {
-        opacity: 0.7;
-        position: static;
-        margin-top: 0.5rem;
-    }
-    
-    .nav-link:hover::before {
-        width: 0;
-    }
-    
-    .enter-button:hover::before {
-        left: 0;
-    }
+/* Focus styles for keyboard navigation */
+.keyboard-navigation button:focus,
+.keyboard-navigation a:focus,
+.keyboard-navigation .poem-item:focus {
+    outline: 3px solid var(--muted-gold);
+    outline-offset: 2px;
 }
 
 /* High contrast mode support */
@@ -798,14 +688,15 @@ h3 {
         --deep-burgundy: #000000;
         --burnt-umber: #333333;
         --black-ink: #000000;
-        --soft-shadow: rgba(0, 0, 0, 0.5);
     }
-    
-    .nav-link, .secret-link {
-        border: 1px solid transparent;
-    }
-    
-    .nav-link:focus, .secret-link:focus {
-        border-color: currentColor;
-    }
+}
+
+/* Hidden content */
+.hidden-poems {
+    display: none !important;
+}
+
+/* Smooth transitions for poem content */
+.poem-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
